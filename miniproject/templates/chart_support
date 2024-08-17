@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Chat Support</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+             
+        }
+
+        .border-box {
+            position: absolute;
+            top: 93px;
+            left: 70px;
+            z-index: 1000;
+            transform: skewX(-10deg);
+            background-color: rgb(189, 109, 104);
+            border-radius: 10px;
+            color: #f8f8fc;
+            padding: 10px;
+        }
+
+        .card {
+            width: 500px;
+            height: 550px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #e6e0d9;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-left: 35%;
+        }
+
+        .chat-box {
+            height: 330px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .user-message,
+        .bot-message {
+            background-color: #f8f8fc;
+            color: #16253a;
+            transform: skew(-3deg);
+            border-radius: 5px;
+            padding: 8px;
+            margin-bottom: 5px;
+            max-width: 70%;
+        }
+
+        .user-message {
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background-color: #7771cc;
+            color: #ccd4db;
+            margin-right: auto;
+        }
+
+        .chat-input {
+            display: flex;
+        }
+
+        .chat-input input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .chat-input button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #0d6efd;
+            color: #fff;
+            cursor: pointer;
+        }
+
+    
+
+        #back {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <img src="{{ url_for('static', filename='images/contactus.png') }}" width="100%;" heigth="100px" class="faculty_login_img" alt="search">
+
+            </div>
+        <div class="col-sm-5">
+    <div class="border-box p-3">
+        Have queries?? Get Solved 👍
+    </div>
+    <div class="card py-2">
+        <div class="card-header">
+            <center>
+                <h3 style="font-family: Courier;">Chat Support</h3>
+            </center>
+        </div>
+
+        <div class="card-body">
+            <p class="py-1 text-center">Hey Buddy 🤩..Feel free to ask!</p>
+            <div class="chat-box" id="chatBox">
+                <div id="htmlElement"></div>
+            </div>
+            <div id="responseDisplay"></div>
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Type a message..."
+                    onkeydown="handleEnter(event)">
+                <button class="btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn bg-primary" id="back"
+        onclick="window.location.href='/home/chandana/Documents/Project/home.html'">
+        Back to Home
+    </button>
+    </div>
+</div>
+</div>
+
+    <script>
+        var isFirstMessage = true;
+
+        function sendWelcomeMessage() {
+            var chatBox = document.getElementById('chatBox');
+            var botMessage = document.createElement('div');
+            botMessage.className = 'bot-message';
+            botMessage.textContent = "Hello! How can I help you today?";
+            chatBox.appendChild(botMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        window.onload = function () {
+            sendWelcomeMessage();
+            setupEventListeners();
+        };
+
+        function setupEventListeners() {
+            document.getElementById('messageInput').addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            document.getElementById('selectOption').addEventListener('change', function () {
+                render(this.value);
+            });
+        }
+
+        function sendMessage() {
+            var messageInput = document.getElementById('messageInput');
+            var message = messageInput.value.trim();
+
+            if (message !== '') {
+                displayUserMessage(message);
+                respondToMessage(message);
+                isFirstMessage = false;
+                messageInput.value = ''; // Clear the input field
+            }
+        }
+
+        function displayUserMessage(message) {
+            var chatBox = document.getElementById('chatBox');
+            var userMessage = document.createElement('div');
+            userMessage.className = 'user-message';
+            userMessage.textContent = `You: ` + message;
+            chatBox.appendChild(userMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            scrollToBottom(chatBox);
+        }
+
+        function displayBotMessage(message) {
+            var chatBox = document.getElementById('chatBox');
+            var botMessage = document.createElement('div');
+            botMessage.className = 'bot-message';
+            botMessage.innerHTML = message;
+            chatBox.appendChild(botMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            scrollToBottom(chatBox);
+        }
+
+        function scrollToBottom(chatBox) {
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function respondToMessage(message) {
+            var response = getResponse(message);
+            displayBotMessage(response);
+        }
+
+        function getResponse(message) {
+            var responses = {
+                'hi': 'Hello! Please let me know your concern.',
+                'hai': 'Hello! Please let me know your concern.',
+                'hello': 'Hi there!',
+                'login issue': "I'm sorry to hear that you're having trouble logging in. Have you tried resetting your password?",
+                'cannot log in': "I'm sorry to hear that you're having trouble logging in. Have you tried resetting your password?",
+                'unable to sign in': "I'm sorry to hear that you're having trouble logging in. Have you tried resetting your password?",
+                'good morning': 'Good morning!',
+                'yes': 'Please verify your email and password',
+                'ok bye': 'Have a Nice Day 😊'
+            };
+
+            var lowercaseMessage = message.toLowerCase();
+            var selectOpt =
+                `Please consult us through Email...
+                <a href="mailto:admin@rgukrkv.ac.in" style="color:black">Email Us</a>
+
+ 
+                `;
+
+            if (responses[lowercaseMessage]) {
+                return responses[lowercaseMessage];
+            } else {
+                return selectOpt;
+            }
+        }
+ 
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,337 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Your head content here -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="{{ url_for('static', filename='home.css') }}"  rel="stylesheet"> 
+
+    <link href="{{ url_for('static', filename='home.css') }}"  rel="stylesheet"> 
+
+    <style>
+        body{
+            background-color: bisque;
+        }
+        .profile-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.7), -10px -10px 15px rgba(0, 0, 0, 0.7);
+            max-width: 1000px;
+            width: 100%;
+            margin-left: 250px;
+            margin-top: 50px; 
+            margin-bottom: 40px;       
+        }
+
+        
+         
+        .card-body h4{
+            align-items: center;
+            font-family:Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            color: darkblue;
+            margin-bottom: 16px;
+        
+        }
+             
+        .card-body h5{
+            align-items: center;
+            font-family:Arial, Helvetica, sans-serif;
+            color:brown;
+            font-size: 18px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        
+
+        }
+        table{
+            border-color: rgb(30, 126, 210);
+            background-color: rgb(255, 255, 255);
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 700;
+ 
+
+        }
+        td, th {
+    padding: 10px;
+        }
+        
+ 
+        .custom-line-height {
+        margin-bottom:7px;
+    }
+    .custom-line-height1 {
+        margin-bottom:19px;
+    }
+
+    .top-left-img {
+            position: absolute;
+            left: 10px;
+            top:140px;
+         }
+    .profileimage{
+        width: 150px; height: 200px; border-radius: 10%;
+        margin-right:20px;
+        margin-top: 120px;
+
+ 
+     }
+    
+     .edit-icon {
+            position: absolute;
+            left: 0; 
+            top: 0;      
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 5px;
+            border-radius: 50%;
+            margin-left: 120px;
+            cursor: pointer;
+            color:black;
+            margin-top: 120px;
+        }
+        .top-right_log {
+            position: absolute;
+            right: 10px;
+            margin-top: 140px;
+            z-index: 1;
+
+        }
+        .top-left{
+            z-index: 1;
+            margin-top: 140px;
+
+        }
+        .header{
+    margin-left: 110px;
+   }
+   .logo{
+    margin-top: -40px;
+   }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+   
+</div>
+    <div class="row">
+            <a href="{{ url_for('Home') }}"    class="top-left"  >
+                    <i class="fas fa-home custom-icon custom-icon  " style="margin-left: 20px; "  ></i></a>
+       
+            <a href="{{ url_for('student_logout') }}"    class="top-right_log"  >
+                <i class="fas fa-sign-out-alt custom-icon  " style="font-size: 2em; "  ></i>
+                <span style="color:black"><h4>Logout</h6></span>
+            </a>
+        </div>
+       <div class="container-fluid">
+        <div class="row" style="background-color: white;">
+            <nav class="navbar  navbar-expand-lg ">
+    
+            <div class="col-sm-2">
+    
+                <h3 class="navbar-brand d-lg d-sm"><img src="{{ url_for('static', filename='images/Logonew.png') }}" alt="logo" width="100px" height="120px" class="logo" ></h3>
+            </div>
+            <div class="col-sm-10 header">
+    
+            <h1 class="head">Rajiv Gandhi University of Knowledge Technologies-Andhra Pradesh</h1>  
+            <h4 class="subhead">Catering to the Educational Needs of the Gifted Rural Youth of Andhra Pradesh</h4>
+    
+                <h4 class="subhead">(Constituted under the A.P Govt. Act 18 of 2008 and recognized as per Section 2(f), 12(B) of UGC Act, 1956)</h4>
+        </div> 
+    </nav>
+      </div>
+      <div class="profile-container">
+       
+        <div class="row">
+
+            <div class="col-sm-12">
+              
+                 
+                <div class="card">
+                    <h2 class="h2 card-header" align="center">Presonal Details</h2>
+                    <div class="card-body"  >
+                        <div class="row">
+                            <div class="col-sm-3   ">
+                                
+                                <h4>ID:</h4>
+                                <h4>Name:</h4>
+                                <h4>Email:</h4>
+                                <h4>Phone Number:</h4>
+                                <h4>Gender:</h4>
+                            </div>
+                            <div class="col-sm-3  text-center">
+                                <h5 class="card-text custom-line-height">{{ data[0] }}</h5>
+                                <h5 class="card-text custom-line-height">{{ data[1] }}</h5>
+                                <h5 class="card-text custom-line-height">{{ data[2] }}</h5>
+                                <h5 class="card-text custom-line-height">{{ data[3] }}</h5>
+                                <h5 class="card-text custom-line-height">{{ data[4] }}</h5>
+                                <h5 class="card-text custom-line-height">{{ data[5] }}</h5>
+
+    
+                            </div>
+                            <div class="col-sm-3  ">
+                                <h4>DOB:</h4>
+                                <h4>Semister:</h4>
+                                <h4>Batch:</h4>
+                                <h4>Branch:</h4>
+                        </div>
+                        <div class="col-sm-3  text-center">
+                            <h5 class="card-text custom-line-height1">{{ data[6] }}</h5>
+                            <h5 class="card-text custom-line-height1">{{ data[7] }}</h5>
+                            <h5 class="card-text custom-line-height1">{{ data[8] }}</h5>
+                            <h5 class="card-textcustom-line-height1">{{ data[9] }}</h5>
+    
+                        </div>
+                    </div>
+                </div>
+ 
+
+ 
+            </div>
+         
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <a href="{{ url_for('student_subjects') }}">
+                    <button type="button" class="btn btn-primary bt2" style="width:150px; font-size:18px;">subjects</button></a>
+                <div class="subjectTable" id="subjectTable">
+                    <table border="3px solid" class="text-center">
+                        <colgroup>
+                            <col style="width:1200px;">
+                        </colgroup>
+                        <tbody>
+                            {% for subject in subjects %}
+                            <tr>
+                                <td>{{ subject[1] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+            
+        </div>
+        </div>
+        </div></div>
+              
+<!--Fotter-->
+       
+<footer class="text-active fotter" style="padding-left: 20px;" >
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" style="z-index:900;">
+      <!-- Left -->
+         <span class="d-none d-sm-block">Get connected with us on social networks:</span>
+   
+       <!-- Left -->
+  
+      <!-- Right -->
+   
+      <div class="icons" style="padding-left:40px">
+        <a href="" class="me-3 text-reset">
+            <i class="bi bi-facebook fs-4 white-color white_color"></i>
+          </a>
+          <a href="" class="me-3 text-reset">
+            <i class="bi bi-twitter fs-4 white-color white_color" ></i>
+          </a>
+          
+          <a href="" class="me-6 text-reset">
+            <i class="bi bi-instagram fs-4 white-color white_color"></i>
+          </a>
+          <a href="" class="me-3 text-reset">
+            <i class="bi bi-linkedin fs-4 white-color white_color"></i>
+          </a>  
+       </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+     <section >
+      <div class="container text-center text-md-start mt-5">
+         <div class="row mt-3">
+           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+             <h6 class="text-uppercase fw-bold mb-4">
+              Smart Attendance Management
+            </h6>
+            <p>
+                Efficiently managing student presence with our cutting-edge Attendance Management System, fostering a connected and engaged academic community.
+            </p>
+          </div>
+   
+           <div class="col-md-2 ">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+             Quick Links
+            </h6>
+            <p>
+              <a href="{{ url_for('Home') }}" class="text-reset">Home</a>
+            </p>
+            <p>
+              <a href="{{ url_for('About_us') }}" class="text-reset">About us</a>
+            </p>
+            <p>
+              <a href="{{ url_for('Contact_us') }}" class="text-reset">Contact us</a>
+            </p>
+            
+          </div>
+           
+   
+           <div class="col-md-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p><i class="bi bi-cursor"></i>IIIT RK VALLEY</p>
+            <p>
+              <i class="bi bi-envelope"></i>
+              admin@rguktrkv.ac.in
+            </p>
+            <p><i class="bi bi-telephone-outbound"></i> 8801466582</p>
+           </div>
+         </div>
+       </div>
+    </section>
+   
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    <big>©</big> 2023 Copyright all copy rights reserverd
+     </div>
+    <!-- Copyright -->
+  </footer>
+       
+    </div>
+   
+    <div class="top-left-img">
+        <a href="#profileForm" onclick="openFileInput()">
+            <img src="{{ profile_image }}" alt="Profile Image" class="profileimage"> 
+            <div class="edit-icon"><i class="fas fa-edit"></i></div>
+        </a>
+        <form id="profileForm" enctype="multipart/form-data" action="{{ url_for('upload') }}" method="post">
+            <input type="file" accept="image/*" class="form-control" name="photo" id="profilePic" style="width: 150px; display: none;" onchange="previewImage(event)"><br/>
+            <input type="submit" id="photoSubmit" name="photo1" class="btn btn-primary" style="margin-left: 40px; display: none;">
+        </form>
+    
+        <script>
+            function openFileInput() {
+                document.getElementById('profilePic').click();
+            }
+    
+            function previewImage(event) {
+                const input = event.target;
+    
+                
+                document.getElementById('photoSubmit').click();
+            }
+        </script>
+    </div>
+    
+    
+ </body>
+</html>
+

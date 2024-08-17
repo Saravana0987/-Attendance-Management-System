@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Faculty AMS Portal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <style>
+         
+        .btn-info:hover{
+	transform: scale(1.1);
+  background-color:#03e9f4;
+  color:#fff;
+  box-shadow: 0 0 5px #03e9f4,0 0 25px #03e9f4,0 0 50px #03e9f4,0 0 100px #03e9f4;
+
+  }
+  .btn-primary:hover, .btn-danger:hover{
+	transform: scale(1.1);
+  background-color: #4db8ff;
+  color:#fff;
+  box-shadow: 0 0 5px #03e9f4,0 0 25px #03e9f4,0 0 50px #03e9f4,0 0 100px #03e9f4;
+
+  }
+  .btn-danger:hover{
+	transform: scale(1.1);
+  background-color: red;
+  color:#fff;
+  box-shadow: 0 0 5px #03e9f4,0 0 25px #03e9f4,0 0 50px #03e9f4,0 0 100px #03e9f4;
+
+  }
+   body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('/static/images/ams.jpg');
+    background-size: 100% auto;  
+    background-position: center;
+    background-attachment: fixed;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+
+
+
+    .ams_container{
+      background:rgba(249, 249, 248, 0.5); /* Transparent white background */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.7), -10px -10px 15px rgba(0, 0, 0, 0.7);
+      width:900px;
+      margin-left:30px;      
+      transform: perspective(500px) rotateX(5deg); /* 3D rotation */
+      transition: transform 0.3s ease-in-out; /* Add smooth transition */
+      margin-top: 50px;
+
+           
+        }
+
+        .ams_container:hover {
+            transform: perspective(500px) rotateX(0deg); /* Reset rotation on hover */
+        }
+     .form-control:focus {
+    outline: none;  
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.7); 
+    }
+    .top-right_log {
+            position: absolute;
+            top: 150px;
+            right: 10px;
+            color:black;
+        }
+    
+    .custom-home {
+        font-size: 3em;
+        color:white;
+        background-color:black;
+        border-radius: 50%;
+        padding: 10px;  
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .custom-home:hover{
+        color:orange;
+    }
+     /*Nav bar css*/
+     .head{
+        font-weight: bolder;
+        color:#88181a;
+        font-size:25px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+ 
+     }
+    .subhead{
+        font-size: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        color:#88181a;
+ 
+
+    }
+.logo{
+    margin-left:100px;
+}
+nav{
+    background-color:white;
+    margin-left: 140px;
+ }
+      
+    </style>
+</head>
+
+<body>
+    
+    <div class="container-fluid">
+        <div class="row " style="background-color: white;">
+            <nav class="navbar  navbar-expand-lg ">
+    
+            <div class="col-sm-2">
+    
+                <h3 class="navbar-brand d-lg d-sm"><img src="{{ url_for('static', filename='images/Logonew.png') }}" alt="logo" width="100px" height="120px" class="navlogo" ></h3>
+            </div>
+            <div class="col-sm-12 ">
+    
+            <h1 class="head">Rajiv Gandhi University of Knowledge Technologies-Andhra Pradesh</h1>  
+            <h4 class="subhead">Catering to the Educational Needs of the Gifted Rural Youth of Andhra Pradesh</h4>
+    
+                <h4 class="subhead">(Constituted under the A.P Govt. Act 18 of 2008 and recognized as per Section 2(f), 12(B) of UGC Act, 1956)</h4>
+        </div> 
+    </nav>
+      
+    </div>
+   
+    <div class="row">
+        <div class="home">
+        
+        <a href="{{ url_for('home') }}"    class="top-right_log nav-link"  >
+            <i class="fas fa-sign-out-alt custom-home " style="font-size: 2em; "  ></i>
+            <span style="color:rgb(255, 255, 255)"><h4>Logout</h4></span>
+            </a>    
+         
+     
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 ams_container">
+    <h1>Faculty AMS Portal</h1><br>
+    <form method="POST" action="{{ url_for('faculty_ams') }}" onsubmit="return validateForm()">
+        <div class="form-group">
+            <label for="branch">Branch:</label>
+            <select name="branch" class="form-control" id="branch">
+                <option value="{{dept}}">{{dept}}</option>
+            </select>
+        </div>
+        <div class="form-group" id="e1sem1_cse_subjects">
+            <label for="subjects">Subject:</label>
+            <select name="subjects" class="form-control">
+                {% for value in subjects %}
+                <option value="{{ value.subjects }}">{{ value.subjects }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+        <input type="date" name="date" id="date" class="form-control">
+            </div>
+        <div class="absents" id="absents">
+        <div class="form-group">
+        <label for="absent">Enter Absentes ID:</label>
+        <input type="text" name="absent" id="absent" class="form-control">
+        </div>
+    </div>
+    <div class="delete" id="delete" style="display:none">
+        <div class="form-group">
+            <label for="delete_id">ID to Delete:</label>
+            <input type="text" name="delete_id" class="form-control" id="delete_id" class="form-control">
+        </div>
+    </div>
+    <div class="btn-group">
+        <input type="submit" value="Submit!" class="btn btn-primary" style="width:100px">
+        <button type="button" class="btn btn-danger bt2" id="delete_details_button" onclick="deleteSection()" style="margin-left:20px;border-radius:5px;">Remove Absentes</button> 
+        <button type="button" class="btn btn-info bt2" id="absent_details_button" onclick="absentSection()" style="display:none;margin-left:20px;border-radius: 5px;">back</button>
+    </div>
+    </form>
+</div>
+<div class="col-sm-2"></div>
+
+</div>
+</div>
+ 
+    <script>
+    function deleteSection() {
+    document.getElementById('delete').style.display = 'block';
+    document.getElementById('absents').style.display = 'none';
+    document.getElementById('delete_details_button').style.display = 'none';
+    document.getElementById('absent_details_button').style.display = 'block';
+}
+
+      function absentSection() {
+        document.getElementById('delete').style.display = 'none';
+        document.getElementById('absents').style.display = 'block';
+        document.getElementById('delete_details_button').style.display = 'block';
+        document.getElementById('absent_details_button').style.display = 'none';
+
+
+      }
+
+        function validateForm() {
+            var date = document.getElementById('date').value;
+            var absentValue = document.getElementById('absent').value;
+            var deleteValue = document.getElementById('delete_id').value;
+
+            if (date === "") {
+                alert('Please select a date');
+                return false; // Prevent form submission
+            }
+
+
+            if (absentValue !== "") {
+                    var enteredValue = prompt('Enter a value:', absentValue);
+
+                if (enteredValue !== null) {
+        // User clicked "OK" in the prompt
+                    var confirmation = confirm('Entered value: ' + enteredValue);
+
+                    if (confirmation) {
+                        return true;
+                 }  else {
+                        alert('Submission canceled.');
+                        return false; // Prevent form submission
+                    }
+                }else {
+        // User clicked "Cancel" in the prompt
+                    alert('Submission canceled.');
+                    return false; // Prevent form submission
+                 }
+            }
+
+            if (deleteValue !== "") {
+                var enteredValue = prompt('Enter a value:', deleteValue);
+
+                if (enteredValue !== null) {
+        // User clicked "OK" in the prompt
+                    alert('Entered value: ' + enteredValue);
+                } else {
+        // User clicked "Cancel" in the prompt
+                    alert('Deletion canceled.');
+                    return false; // Prevent further execution or form submission
+                }
+            }
+
+            return true;
+        }
+    </script>
+</body>
+
+</html>

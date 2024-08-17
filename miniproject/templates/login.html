@@ -1,0 +1,354 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+	 
+<title>login</title>
+ 
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="{{ url_for('static', filename='home.css') }}"  rel="stylesheet"> 
+
+ 
+  <script src="{{ url_for('static', filename='Login.js') }}" defer></script>
+ 
+ 
+  
+<style>
+	.error {
+		color: red;
+		font-size: 14px;
+	}
+   
+  .custom-icon {
+	  width:30px;
+	  font-size: 16px;
+	  color:#e71602;
+
+  }
+   
+  .btn-success:hover{
+	transform: scale(1.1);
+  background-color:green;
+  color:#fff;
+  box-shadow: 0 0 5px #03e9f4,0 0 25px #03e9f4,0 0 50px #03e9f4,0 0 100px #03e9f4;
+
+  }
+  .btn-primary:hover{
+	transform: scale(1.1);
+  background-color: #4db8ff;
+  color:#fff;
+  box-shadow: 0 0 5px #03e9f4,0 0 25px #03e9f4,0 0 50px #03e9f4,0 0 100px #03e9f4;
+
+  }
+
+ 
+
+  .error-message{
+    color:red;
+    padding-left:140px;
+    
+
+    }
+   @media (max-width: 768px) {
+	    #form{
+		    padding-left:20px;
+	      }
+      
+   }
+   .success-message{
+      color:green;
+    padding-left:140px;
+    }
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('/static/images/student_login.jpg');
+    background-size: 100% auto; /* Adjusted for full width */
+    background-position: center;
+    background-attachment: scroll;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+    .student-container {
+      background: rgba(255, 255, 255, 0.8); /* Transparent white background */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      max-width: 400px;
+      width: 100%;
+      height:50%;
+      margin-top: 0px;
+ 
+    }
+    .student_login_img{
+      margin-top: 5px;
+    }
+   
+    
+   .header{
+    margin-left: 110px;
+   }
+   .logo{
+    margin-top: -40px;
+   }
+   .menu ul li:hover {
+    background-color: rgb(167, 154, 152);
+    width:200px;
+}
+
+          
+   </style>
+</head>
+ <body>
+  
+<div class="container-fluid">
+  <div class="row" style="background-color: white;">
+    <nav class="navbar  navbar-expand-lg ">
+
+    <div class="col-sm-2">
+
+        <h3 class="navbar-brand d-lg d-sm"><img src="{{ url_for('static', filename='images/Logonew.png') }}" alt="logo" width="100px" height="120px" class="logo" ></h3>
+    </div>
+    <div class="col-sm-10 header">
+
+    <h1 class="head">Rajiv Gandhi University of Knowledge Technologies-Andhra Pradesh</h1>  
+    <h4 class="subhead">Catering to the Educational Needs of the Gifted Rural Youth of Andhra Pradesh</h4>
+
+        <h4 class="subhead">(Constituted under the A.P Govt. Act 18 of 2008 and recognized as per Section 2(f), 12(B) of UGC Act, 1956)</h4>
+</div> 
+</nav>
+</div>
+   
+        
+<div class="row">
+
+
+  <div class="col-sm-2" style="background-color:#ffffff">
+    <div class="sidebar">
+
+      <div class="menu">
+        <hr >
+           <ul>
+            
+            <li><a href="{{ url_for('Home') }}" class="nav-link px-2" style="color:black"><i
+              class="fas fa-home px-1  icon" title="Home"></i>Home</a></li>
+              <li><a href="{{ url_for('Home') }}" class="nav-link px-2" style="color:black"><i
+                class="fas fa-user px-1  icon" title="Home"></i>Overview</a></li>
+              
+              <li><a href="{{ url_for('login_form') }}" class="nav-link px-2" style="color:black"><i
+                          class="fas fa-chart-bar px-1  icon" title="Dashboard"></i>Student_Dashboard</a></li>
+              <li><a href="{{ url_for('faculty_login_form') }}" class="nav-link px-2" style="color:black"><i
+                          class="fas fa-chalkboard-teacher px-2  icon" title="Faculty"></i>Faculty</a></li>
+              <li><a href="{{ url_for('student_logout') }}" class="nav-link px-2" id="student"
+                      onclick="return display()" style="color:black;"><i class="fas fa-users px-2  icon" title="Student" ></i>
+                      Student</a>
+              </li> 
+              <li><a href="{{ url_for('About_us') }}" class="nav-link px-2" id=" About Us"
+                onclick="return display()" style="color:black;"><i class="fas fa-info-circle px-2  icon" title="   Contact Us" ></i>
+                About Us</a>
+        </li><li><a href="{{ url_for('Contact_us') }}" class="nav-link px-2" id=" Contact Us"
+                onclick="return display()" style="color:black;"><i class="fas fa-comment-dots px-2  icon" title="   Contact Us" ></i>
+                Contact Us</a>
+        </li>
+               
+              <hr >
+          </ul>
+      </div>
+  </div>
+  </div>
+
+         
+        <div class="col-sm-4 ">
+          <img src="{{ url_for('static', filename='images/Login.png') }}" width="100%;" heigth="100px" class="student_login_img" alt="search">
+        </div>
+        <div class="col-sm-1 "></div>
+        <div class="col-sm-5 student-container" id="form-container" >
+          
+
+         
+         <form  method="post" id="form" onsubmit="return validateForm1()" style="margin-top:40px" action="\student_login">
+          <div class="h4" style="color:green">{{success_message}}      </div>   
+          <div class="h4" style="color:green">{{ password_reseted}}    </div>   
+
+          <div class="h4" style="color:red">{{login_error_message}}  </div>
+        <div class="form-group " >
+          <label for="name1">Name:</label>
+          <div class="input-group ">
+            <div class="input-group-prepend">
+            <span class="input-group-text " >    <i class="fas fa-user custom-icon" style="cursor: pointer;"></i></span>
+            <input type="text" class="form-control " name="username" id="name1" placeholder="Enter your name" >
+             </div>
+            </div>
+
+          <div class="error" id="nameError1"></div>
+
+    </div>
+    
+
+         
+        <div class="form-group">
+          <label for="user-email1">Email:</label>
+          <div class="input-group ">
+            <div class="input-group-append">
+          <input type="email" class="form-control " name="useremail" id="user-email1" placeholder="Enter your mail" autocomplete="off">
+          <span class="input-group-text "   ><i class="bi bi-envelope custom-icon"></i></span>
+
+                </div>      
+                 </div>	
+
+          <div class="error" id="emailError1"></div>
+
+         </div>			
+         <div class="form-group">
+        
+          <label for="user-password1">Password:</label>
+          <div class="input-group ">
+ 				<div class="input-group-append">
+					<input type="password" class="form-control" name="userpassword" id="user-password1" placeholder="Enter your password" autocomplete="off">
+
+				<span class="input-group-text " >
+				<i class="far fa-eye custom-icon" id="togglePassword" style=" cursor: pointer;"></i></span>
+			</div>
+
+				</div>
+
+           <div class="error" id="passwordError1"></div>
+        </div>
+
+ 
+            <div class="form-group">
+            <div class="checkbox ">
+              <label><input type="checkbox"  value="Terms" name="check[]"  id="check1" checked><a href=" ">I agree with the all Terms and Condtions</a></label>
+              </div>
+            </div>
+            <div class="button-group " >
+            <button type="submit" class="btn btn-success bt2 "  style="width:150px;font-size:18px;">login</button> &nbsp;
+            <a href="{{ url_for('registration_form') }}"> <button type="button" class="btn btn-primary bt2" style="width:150px;font-size:18px;">Register</button></a>
+    </div>
+    <div class="form-group">
+      <a href="{{ url_for('forgot_password') }}" style="color: blue; text-decoration: underline;">Forgot Password?</a>
+  </div>
+        </form>
+    </div>
+ 
+  </div>
+   
+  <!--fotter-->
+<footer class="text-active fotter" > <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" style="z-index:900;">
+    <!-- Left -->
+       <span class="d-none d-sm-block">Get connected with us on social networks:</span>
+ 
+     <!-- Left -->
+
+    <!-- Right -->
+ 
+    <div class="icons" style="padding-left:40px">
+      <a href="" class="me-3 text-reset">
+        <i class="bi bi-facebook fs-2 white-color white-icon" style="font-size:2em"></i>
+      </a>
+      <a href="" class="me-3 text-reset">
+        <i class="bi bi-twitter fs-2 white-color white-icon" style="font-size:2em"></i>
+      </a>
+      
+      <a href="" class="me-3 text-reset">
+        <i class="bi bi-instagram fs-2 white-color white-icon" style="font-size:2em"></i>
+      </a>
+      <a href="" class="me-3 text-reset">
+        <i class="bi bi-linkedin fs-2 white-icon" style="font-size:2em"></i>
+      </a>
+       
+     </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+   <section >
+    <div class="text-center text-md-start mt-5">
+       <div class="row mt-3">
+         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+           <h6 class="text-uppercase fw-bold mb-4">
+            Smart Attendance Management
+          </h6>
+          <p>
+              Efficiently managing student presence with our cutting-edge Attendance Management System, fostering a connected and engaged academic community.
+          </p>
+        </div>
+ 
+         <div class="col-md-2 ">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+           Quick Links
+          </h6>
+          <p>
+            <a href="{{ url_for('Home') }}" class="text-reset">Home</a>
+          </p>
+          <p>
+            <a href="{{ url_for('About_us') }}" class="text-reset">About us</a>
+          </p>
+          <p>
+            <a href="{{ url_for('Contact_us') }}" class="text-reset">Contact us</a>
+          </p>
+          
+        </div>
+         
+ 
+         <div class="col-md-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="bi bi-cursor"></i>IIIT RK VALLEY</p>
+          <p>
+            <i class="bi bi-envelope"></i>
+            admin@rguktrkv.ac.in
+          </p>
+          <p><i class="bi bi-telephone-outbound"></i> 8801466582</p>
+         </div>
+       </div>
+     </div>
+  </section>
+ 
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+  <big>©</big> 2023 Copyright all copy rights reserverd
+   </div>
+  <!-- Copyright -->
+</footer>
+</div>
+</div>
+<script>
+
+  /*For Password Viewer*/
+
+const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#user-password1');
+
+togglePassword.addEventListener('click', function (e) {
+// toggle the type attribute
+const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+password.setAttribute('type', type);
+// toggle the eye slash icon
+this.classList.toggle('fa-eye-slash');
+
+});
+
+
+
+
+</script>
+ </body>
+ 
+
+</html>
+ 

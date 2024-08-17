@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+<title>Registration</title>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css" rel="stylesheet">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+     <script src="{{ url_for('static', filename='Registration.js') }}" defer></script>
+     <script src="{{ url_for('static', filename='toogleon_subjects.js') }}" defer></script>
+     <link href="{{ url_for('static', filename='home.css') }}"  rel="stylesheet"> 
+
+
+      <style>
+         
+    .error {
+		color: red;
+		font-size: 14px;
+	}
+   
+  .custom-icon {
+	  width:30px;
+	  font-size: 16px;
+	  color:#e71602;
+
+  }
+   
+  .btn-success:hover{
+	transform: scale(1.1);
+  background-color:green;
+  color:#fff;
+  box-shadow: 0 0 5px #03e9f4,0 0 25px #03e9f4,0 0 50px #03e9f4,0 0 100px #03e9f4;
+
+  }
+  .btn-primary:hover{
+	transform: scale(1.1);
+  background-color: #4db8ff;
+  color:#fff;
+  box-shadow: 0 0 5px #03e9f4,0 0 25px #03e9f4,0 0 50px #03e9f4,0 0 100px #03e9f4;
+
+  }
+    .reg{
+      margin-top:30px;font-family:Arial;color:white;margin-bottom:5px
+    }
+  
+   @media (max-width: 768px) {
+	#form1{
+		padding-left:20px;
+	}
+  .reg{
+    margin-top:35px; 
+  }
+
+   }
+  .error-message{
+    color:red;
+    padding-left:140px;
+    
+
+    }
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('/static/images/student_register.jpg');
+    background-size: 100% auto; /* Adjusted for full width */
+    background-position: center;
+    background-attachment: fixed ;
+    background-repeat: no-repeat; 
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+      background: rgba(255, 255, 255, 0.7); /* Transparent white background */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.7), -10px -10px 15px rgba(0, 0, 0, 0.7);
+      max-width: 500px;
+      width: 100%;
+      margin-left: 80px;
+      margin-top: 80px;
+
+     }
+     .form-control:focus {
+    outline: none;  
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.7); 
+    }
+.header{
+    margin-left: 150px;
+   }
+   .navlogo{
+    margin-top: -40px;
+    margin-left: 60px;
+   }
+   .row-head{
+    margin-top:280px;
+   }
+   .menu ul li:hover {
+    background-color: rgb(167, 154, 152);
+    width:200px;
+}
+
+    </style>
+       
+
+</head>
+<body onload="toggleSubjects()">
+<div class="container-fluid">
+  
+
+  <div class="row row-head" style="background-color: white;">
+    <nav class="navbar  navbar-expand-lg ">
+
+    <div class="col-sm-2">
+
+        <h3 class="navbar-brand d-lg d-sm"><img src="{{ url_for('static', filename='images/Logonew.png') }}" alt="logo" width="100px" height="120px" class="navlogo" ></h3>
+    </div>
+    <div class="col-sm-10 header">
+
+    <h1 class="head">Rajiv Gandhi University of Knowledge Technologies-Andhra Pradesh</h1>  
+    <h4 class="subhead">Catering to the Educational Needs of the Gifted Rural Youth of Andhra Pradesh</h4>
+
+        <h4 class="subhead">(Constituted under the A.P Govt. Act 18 of 2008 and recognized as per Section 2(f), 12(B) of UGC Act, 1956)</h4>
+</div> 
+</nav>
+</div>
+        <div class="row">
+         <div class="col-sm-2" style="background-color: #ffffff;padding-top: 30px;padding-bottom: 160px;">
+          <div class="sidebar" >
+            <div class="menu">
+                <hr >
+                <ul>
+                  <li><a href="{{ url_for('Home') }}" class="nav-link px-2" style="color:black"><i
+                    class="fas fa-home px-1 icon " title="Home"></i>Home</a></li>
+        <li><a href="{{ url_for('Overview') }}" class="nav-link px-2" style="color:black"><i
+                    class="fas fa-user px-2 icon" title="Overview"></i>Overview</a></li>
+                    
+
+                    <li><a href="{{ url_for('login_form') }}" class="nav-link px-2" style="color:black"><i
+                                class="fas fa-chart-bar px-1 icon " title="Dashboard"></i>Student_Dashboard</a></li>
+                    <li><a href="{{ url_for('faculty_login_form') }}" class="nav-link px-2" style="color:black"><i
+                                class="fas fa-chalkboard-teacher px-2 icon" title="Faculty"></i>Faculty</a></li>
+                    <li><a href="{{ url_for('registration_form') }}" class="nav-link px-2" id="student"
+                            onclick="return display()" style="color:black;"><i class="fas fa-users px-2 icon" title="Student" ></i>
+                            Student</a>
+                    </li>
+                    <li><a href="{{ url_for('About_us') }}" class="nav-link px-2" id=" About Us"
+                      onclick="return display()" style="color:black;"><i class="fas fa-info-circle px-2  icon" title="   Contact Us" ></i>
+                      About Us</a>
+              </li>
+                    <li><a href="{{ url_for('Contact_us') }}" class="nav-link px-2" id=" Contact Us"
+                      onclick="return display()" style="color:black;"><i class="fas fa-comment-dots px-2  icon" title="   Contact Us" ></i>
+                      Contact Us</a>
+              </li>
+                    <hr >
+                </ul>
+            </div>
+        </div>
+         </div> 
+        <div class="col-sm-3">
+ 
+        </div>
+          <div class="col-sm-4 form-container">
+         <h1 align="center" style="font-family:Cursive;" >Registration Form</h1><br/> 
+         <div class="h4" style="color:red">{{error_message}}      </div>   
+         <form method="post" id="form1" onsubmit="return validateForm()" action="/submit">
+          <div class="previous" id="previous">
+
+         <div class="form-group">
+          <label for="name">Name:</label>
+          <div class="input-group ">
+            <div class="input-group-prepend">
+            <span class="input-group-text " >    <i class="fas fa-user custom-icon" style="cursor: pointer;"></i></span>
+
+            <input type="text" class="form-control  " name="name1" id="name" placeholder="Enter your name" >
+           </div>
+           <div class="error" id="nameError"></div>
+
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="Idnumber">IdNumber:</label>
+   
+        <input type="text" class="form-control  " name="Idnumber" id="Idnumber" placeholder="R190063" >
+        <div class="error" id="IdError"></div>
+  </div>
+ 
+  
+ 
+ 
+
+        <div class="form-group">
+          <label for="user-email">Email:</label>
+            <div class="input-group ">
+            <div class="input-group-append">
+
+          <input type="email" class="form-control " name="email" id="user-email" placeholder="Enter your mail" >
+          <span class="input-group-text "   ><i class="fas fa-envelope custom-icon"></i></span>
+      </div>
+      </div>
+          <div class="error" id="emailError"></div>
+
+         </div>
+         
+
+
+         <div class="form-group">
+          <label for="user-password">Password:</label>
+          <div class="input-group ">
+       <div class="input-group-append">
+        <input type="password" class="form-control" name="password" id="user-password" placeholder="Enter your password" >
+
+      <span class="input-group-text " >
+      <i class="far fa-eye custom-icon" id="togglePassword1" style=" cursor: pointer;"></i></span>
+   </div>
+ 
+          <div class="error" id="passwordError"></div>
+        </div>
+        <div class="form-group">
+          <label for="Confirmation-password">Confirmation:</label>
+          <input type="Confirmation-password" class="form-control" name="Confirmation-password" id="Confirmation-password" placeholder="Enter your password" >
+          <div class="error" id="confirmPasswordError"></div>
+
+        </div>
+
+            <div class="form-group" >
+                <label>Gender:</label>
+                <div class="form-check form-check-inline" >
+                    <input type="radio" class="form-check-input" id="male" name="gender" value="male">
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="female" name="gender" value="female">
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="Other" name="gender" value="Other">
+                    <label class="form-check-label" for="Other">Other</label>
+                </div>
+
+                <div class="error" id="genderError"></div>
+            </div>
+     
+            <div class="form-group">
+                <label>Date of Birth:</label>
+                <div class="input-group date" data-date-format="dd-mm-yyyy">
+                    <input type="date" class="form-control" name="dateofbirth" id="date1" placeholder="dd-mm-yyyy" >
+                 </div>
+            </div>
+            
+   
+
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" >
+                <div class="error" id="phoneError"></div>
+            </div>
+          </div></div>
+            <!--Secondary section used to reduce form size-->
+           
+            <div class="next" id="next" style="display: none;">
+              <!--Button for to view previous section-->
+              <button type="button" class="btn btn-warning bt2" onclick="showPreviousSection()" style="margin-bottom: 10px; width: 100px;">Back</button>
+
+            <div class="form-group">
+              <label for="Sem">Semister :</label>
+              <select name="Sem" class="form-control" id="Sem" onchange="toggleSubjects()">
+                <option value="choose" selected>select option</option>
+                  <option value="e1sem1">e1sem1</option>
+                  <option value="e1sem2">e1sem2</option>
+                  <option value="e2sem1">e2sem1</option>
+                  <option value="e2sem2">e2sem2</option>
+                  <option value="e3sem1">e3sem1</option>
+                  <option value="e3sem2">e3sem2</option>
+                  <option value="e4sem1">e4sem1</option>
+                  <option value="e4sem2">e4sem2</option>
+              </select>
+              <div class="error" id="semError"></div>
+          
+            </div>
+
+       <div class="form-group">
+        <label for="batch">Batch :</label>
+        <select name="batch" class="form-control" id="batch" onchange="toggleSubjects()">
+          <option value="choose" selected>select option</option>
+            <option value="R19">R19</option>
+            <option value="R18">R18</option>
+            <option value="R20">R20</option>
+            <option value="R21">R21</option>
+            <option value="R22">R22</option>
+        </select>
+        <div class="error" id="batchError"></div>
+    
+      </div>
+
+      <div class="form-group">
+        <label for="branch">Branch</label>
+        <select name="branch" class="form-control" id="branch" onchange="toggleSubjects()">
+          <option value="choose" selected>select option</option>
+            <option value="cse">CSE</option>
+            <option value="ece">ECE</option>
+            <option value="civil">CIVIL</option>
+            <option value="mech">MECH</option>
+            <option value="eee">EEE</option>
+            <option value="chem">CHEMICAL</option>            
+            <option value="mme">MME</option>            
+        </select>
+        <div class="error" id="branchError"></div>
+    
+      </div>
+<!-- E1Sem1  cse Subjects-->
+
+      <div class="form-group" id="e1sem1_cse_subjects" style="display:none">
+        <label for="checkbox">Subjects:</label>
+
+        <div class="checkbox ">
+
+          <div class="form-check">
+          <label><input type="checkbox"  value="e1sem1_cse_CLA" name="subjects[]"  id="subjects" >Calculus & Linear Algebra(4cr)</label>
+        </div>
+        <div class="form-check">
+      
+          <label><input type="checkbox"  value="e1sem1_cse_BEEE" name="subjects[]"  id="subjects" >Basic Electrical and Electronics Engg (4cr)</label>
+          </div>
+          <div class="form-check">
+      
+          <label><input type="checkbox"  value="e1sem1_cse_PSPC" name="subjects[]"  id="subjects" >Problem Solving and Programming Through C (4cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e1sem1_cse_EGCD" name="subjects[]"  id="subjects" >Engineering Graphics & Computer Drafting(2.5cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e1sem1_cse_ENGLAB" name="subjects[]"  id="subjects" >English-Language communication Skills Lab-I(2.5cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e1sem1_cse_BEEELAB" name="subjects[]"  id="subjects" >Basic Electrical and Electronics Engg. Lab(1.5cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e1sem1_cse_PSPCLAB" name="subjects[]"  id="subjects" >Problem Solving and Programming Through C Lab(1.5cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e1sem1_cse_IC" name="subjects[]"  id="subjects" >Indian Constitution</label>
+          </div>
+          </div>
+          <div class="error" id="subjectsError"></div>
+      </div>
+<!-- E1Sem2 cse Subjects-->
+
+
+      <div class="form-group" id="e1sem2_cse_subjects" style="display:none">
+        <label for="checkbox">Subjects:</label>
+
+        <div class="checkbox ">
+
+          <div class="form-check">
+          <label><input type="checkbox"  value="e1sem2_cse_DM" name="subjects[]"  id="subjects" >Discrete Mathematics(4cr)</label>
+        </div>
+        <div class="form-check">
+      
+          <label><input type="checkbox"  value="e1sem2_cse_EP" name="subjects[]"  id="subjects" > Engineering Physics(4cr)</label>
+          </div>
+          <div class="form-check">
+      
+          <label><input type="checkbox"  value="e1sem2_cse_MEFA" name="subjects[]"  id="subjects" >Managerial Economics and Finance Analysis(3cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e1sem2_cse_OOPS" name="subjects[]"  id="subjects" >Object Oriented Programming through Java(4cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e1sem2_cse_DS" name="subjects[]"  id="subjects" >Data Structures(3cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e1sem2_cse_EPLAB" name="subjects[]"  id="subjects" >Engineering Physics Lab(1.5)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e1sem2_cse_OOPSLAB" name="subjects[]"  id="subjects" >Object Oriented Programming through Java Lab(1.5cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e1sem2_cse_DSLAB" name="subjects[]"  id="subjects" >Data Structures Lab(1.5cr)</label>
+          </div>
+          <div class="form-check">
+            <label><input type="checkbox"  value="e1sem2_cse_ES" name="subjects[]"  id="subjects" >Environmental Science</label>
+            </div>
+          </div>
+          <div class="error" id="subjectsError"></div>
+      </div>
+<!-- E2Sem1 cse Subjects-->
+      <div class="form-group" id="e2sem1_cse_subjects" style="display:none">
+        <label for="checkbox">Subjects:</label>
+
+        <div class="checkbox ">
+
+          <div class="form-check">
+          <label><input type="checkbox"  value="e2sem1_cse_P_AND_S" name="subjects[]"  id="subjects" >Probability and Statistics(4cr)</label>
+        </div>
+        <div class="form-check">
+      
+          <label><input type="checkbox"  value="e2sem1_cse_DLD" name="subjects[]"  id="subjects" > Digital Logic Design(3cr)</label>
+          </div>
+          <div class="form-check">
+      
+          <label><input type="checkbox"  value="e2sem1_cse_DAA" name="subjects[]"  id="subjects" >Design & Analysis of Algorithms(4cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e2sem1_cse_DBMS" name="subjects[]"  id="subjects" >Database Management Systems(3cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e2sem1_cse_FLAT" name="subjects[]"  id="subjects" >Formal Languages & Automata Theory(3cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value= "e2sem1_cse_DLALAB" name="subjects[]"  id="subjects" > Design & Analysis of Algorithms Lab (1.5)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e2sem1_cse_DLDLAB" name="subjects[]"  id="subjects" >  Digital Logic Design Lab(1.5cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e2sem1_cse_DBMSLAB" name="subjects[]"  id="subjects" >Database Management Systems Lab (1.5cr)</label>
+        </div>
+          
+      </div>
+          <div class="error" id="subjectsError"></div>
+      </div>
+
+
+      <!-- E2Sem2 cse Subjects-->
+      <div class="form-group" id="e2sem2_cse_subjects" style="display:none">
+        <label for="checkbox">Subjects:</label>
+
+        <div class="checkbox ">
+
+          <div class="form-check">
+          <label><input type="checkbox"  value="e2sem2_cse_OR" name="subjects[]"  id="subjects" >Introduction to Operation Research(3cr)</label>
+        </div>
+        <div class="form-check">
+      
+          <label><input type="checkbox"  value="e2sem2_cse_COA" name="subjects[]"  id="subjects" > Computer Organization & Architecture(3cr)</label>
+          </div>
+          <div class="form-check">
+      
+          <label><input type="checkbox"  value="e2sem2_cse_DSP" name="subjects[]"  id="subjects" >Data Science with Python(3cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e2sem2_cse_WT" name="subjects[]"  id="subjects" >Web Technologies(3cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e2sem2_cse_CD" name="subjects[]"  id="subjects" >Compiler Design</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value= "e2sem2_cse_COALAB" name="subjects[]"  id="subjects" > Computer Organization & Architecture Lab (1.5)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e2sem2_cse_DSPLAB" name="subjects[]"  id="subjects" >  Data Science with Python Lab(1.5cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e2sem2_cse_WTLAB" name="subjects[]"  id="subjects" >Web Technologies Lab (1.5cr)</label>
+        </div>
+          
+      </div>
+          <div class="error" id="subjectsError"></div>
+      </div>
+
+      
+      <!-- E3Sem1 cse Subjects-->
+      <div class="form-group" id="e3sem1_cse_subjects" style="display:none">
+        <label for="checkbox">Subjects:</label>
+
+        <div class="checkbox ">
+
+          <div class="form-check">
+          <label><input type="checkbox"  value="e3sem1_cse_OS" name="subjects[]"  id="subjects" >Operating System(3cr)</label>
+        </div>
+        <div class="form-check">
+      
+          <label><input type="checkbox"  value="e3sem1_cse_CN" name="subjects[]"  id="subjects" > Computer Networks(3cr)</label>
+          </div>
+          <div class="form-check">
+      
+          <label><input type="checkbox"  value="e3sem1_cse_SE" name="subjects[]"  id="subjects" >Software Engineering(3cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e3sem1_cse_MFDS" name="subjects[]"  id="subjects" >Mathematical Foundations for Data Science(3cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e3sem1_cse_DM" name="subjects[]"  id="subjects" >Elective – I(3cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value= "e3sem1_cse_OSLAB" name="subjects[]"  id="subjects" >Operating System Lab(1.5)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e3sem1_cse_CNLAB" name="subjects[]"  id="subjects" >Computer Networks Lab(1.5cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e3sem1_cse_SELAB" name="subjects[]"  id="subjects" >Software Engineering Lab (1.5cr)</label>
+        </div>
+        <div class="form-check">
+          <label><input type="checkbox"  value="e3sem1_cse_ENGLABI" name="subjects[]"  id="subjects" >English-Language communication Skills Lab- II(1.5cr)</label>
+        </div>
+          
+      </div>
+          <div class="error" id="subjectsError"></div>
+      </div>
+   <!-- E3Sem2 cse Subjects-->
+   <div class="form-group" id="e3sem2_cse_subjects" style="display:none">
+    <label for="checkbox">Subjects:</label>
+
+    <div class="checkbox ">
+
+      <div class="form-check">
+      <label><input type="checkbox"  value="e3sem2_cse_CNS" name="subjects[]"  id="subjects" >Cryptography and Networks Security (4cr)</label>
+    </div>
+    <div class="form-check">
+  
+      <label><input type="checkbox"  value="e3sem2_cse_AI" name="subjects[]"  id="subjects" >Artificial Intelligence(4cr)</label>
+      </div>
+      <div class="form-check">
+  
+      <label><input type="checkbox"  value="e3sem2_cse_EII" name="subjects[]"  id="subjects" >Elective – II(3cr)</label>
+    </div>
+    <div class="form-check">
+      <label><input type="checkbox"  value="e3sem2_cse_EIII" name="subjects[]"  id="subjects" >Elective – III(3cr)</label>
+    </div>
+   <!---- <div class="form-check">
+      <label><input type="checkbox"  value="Elective – I" name="subjects[]"  id="subjects" >Elective – I(3cr)</label>
+    </div> -->
+    <div class="form-check">
+      <label><input type="checkbox"  value= "e3sem2_cse_OE1" name="subjects[]"  id="subjects" >Open Elective-I(1.5)</label>
+    </div>
+    <div class="form-check">
+      <label><input type="checkbox"  value="e3sem2_cse_ENGLABIII" name="subjects[]"  id="subjects" >English-Language communication Skills Lab-I -III(1.5cr)</label>
+    </div>
+    <div class="form-check">
+      <label><input type="checkbox"  value="e3sem2_cse_MP" name="subjects[]"  id="subjects" >Mini Project(3cr)</label>
+    </div>
+    <div class="form-check">
+      <label><input type="checkbox"  value="e3sem2_cse_CDC" name="subjects[]"  id="subjects" >Career Development Course</label>
+    </div>
+    <div class="form-check">
+      <label><input type="checkbox"  value="e3sem2_cse_SI" name="subjects[]"  id="subjects" >Summer Internship(3cr)</label>
+    </div>
+      
+  </div>
+      <div class="error" id="subjectsError"></div>
+  </div>
+  <!-- E4Sem1 cse Subjects-->
+  <div class="form-group" id="e4sem1_cse_subjects" style="display:none">
+    <label for="checkbox">Subjects:</label>
+
+    <div class="checkbox ">
+
+      <div class="form-check">
+      <label><input type="checkbox"  value="e4sem1_cse_ML" name="subjects[]"  id="subjects" >Machine Learning  (4cr)</label>
+    </div>
+    <div class="form-check">
+  
+      <label><input type="checkbox"  value="e4sem1_cse_EIV" name="subjects[]"  id="subjects" >Elective-IV(3cr)</label>
+      </div>
+      <div class="form-check">
+  
+      <label><input type="checkbox"  value="e4sem1_cse_OEII" name="subjects[]"  id="subjects" >Open Elective – II(3cr)</label>
+    </div>
+    <div class="form-check">
+      <label><input type="checkbox"  value="e4sem1_cse_PI" name="subjects[]"  id="subjects" > Project-I(6cr)</label>
+    </div>
+      
+
+
+    
+  </div>
+      <div class="error" id="subjectsError"></div>
+  </div>
+
+
+
+
+ <!-- E4Sem2 cse Subjects-->
+ <div class="form-group" id="e4sem2_cse_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e4sem2_cse_EV" name="subjects[]"  id="subjects" >Elective-V(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem2_cse_OEIII" name="subjects[]"  id="subjects" >Open Elective-III(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem2_cse_OEIV" name="subjects[]"  id="subjects" >Open Elective-IV(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem2_cse_PII" name="subjects[]"  id="subjects" > Project-II(6cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem2_cse_CS" name="subjects[]"  id="subjects" >Community Service(2cr)</label>
+  </div>
+    
+</div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+  <!-- E1Sem1 ECE Subjects-->
+
+  <div class="form-group" id="e1sem1_ece_subjects" style="display:none">
+    <label for="checkbox">Subjects:</label>
+
+    <div class="checkbox ">
+
+      <div class="form-check">
+      <label><input type="checkbox"  value="e1sem1_ece_DM" name="subjects[]"  id="subjects" >Differential Equations and Multivariable calculus(4cr)</label>
+    </div>
+    <div class="form-check">
+  
+      <label><input type="checkbox"  value="e1sem1_ece_EP" name="subjects[]"  id="subjects" >Engineering Physics(4cr)</label>
+      </div>
+      <div class="form-check">
+  
+      <label><input type="checkbox"  value="e1sem1_ece_SS" name="subjects[]"  id="subjects" >Signals and Systems(4cr)</label>
+    </div>
+    <div class="form-check">
+      <label><input type="checkbox"  value="e1sem1_ece_EPLAB" name="subjects[]"  id="subjects" >Engineering Physics Lab(1.5Cr)</label>
+    </div>
+    <div class="form-check">
+      <label><input type="checkbox"  value="e1sem1_ece_ET" name="subjects[]"  id="subjects" >Electrical Technology(4Cr)</label>
+    </div>
+    <div class="form-check">
+      <label><input type="checkbox"  value="e1sem1_ece_ETLAB" name="subjects[]"  id="subjects" >Electrical Technology Lab(1.5cr)</label>
+    </div>
+    <div class="form-check">
+      <label><input type="checkbox"  value="e1sem1_ece_ILT" name="subjects[]"  id="subjects" >Introduction to Latest Technical Advancements(1cr)</label>
+    </div>
+    <div class="form-check">
+      <label><input type="checkbox"  value="e1sem1_ece_PDS" name="subjects[]"  id="subjects" >Programming & Data Structures(3Cr)</label>
+    </div>
+    <div class="form-check">
+        <label><input type="checkbox"  value="e1sem1_ece_PDSLAB" name="subjects[]"  id="subjects" >Programming & Data Structures Lab(1.5cr)</label>
+    </div>
+      </div>
+      <div class="error" id="subjectsError"></div>
+  </div>
+
+
+<!-- E1Sem2 ECE Subjects-->
+
+<div class="form-group" id="e1sem2_ece_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_ece_MM" name="subjects[]"  id="subjects" >Mathematical Methods(4cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem2_ece_OOPS" name="subjects[]"  id="subjects" >Object Oriented Programming(2cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem2_ece_OOPSLAB" name="subjects[]"  id="subjects" >Object Oriented Programming Laboratory(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_ece_CLAB" name="subjects[]"  id="subjects" >Computational Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_ece_ENGLAB" name="subjects[]"  id="subjects" >English-Language Communication skills Lab-1(2.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_ece_EDC" name="subjects[]"  id="subjects" >Electronic Devices and Circuits(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_ece_EDCLAB" name="subjects[]"  id="subjects" >Electronic Devices and Circuits Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_ece_NT" name="subjects[]"  id="subjects" >Network Theory(4Cr)</label>
+  </div>
+  <div class="form-check">
+      <label><input type="checkbox"  value="e1sem2_ece_EGCD" name="subjects[]"  id="subjects" >Engineering Graphics and Design(2.5cr)</label>
+  </div>
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>    
+
+
+
+
+
+<!-- E2Sem1  ECE Subjects-->
+
+<div class="form-group" id="e2sem1_ece_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_ece_PRV" name="subjects[]"  id="subjects" >Probability & Random Variables(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem1_ece_IOT" name="subjects[]"  id="subjects" >Internet of Things Lab(1.5cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem1_ece_AEC" name="subjects[]"  id="subjects" >Analog Electronic Circuits(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_ece_AECLAB" name="subjects[]"  id="subjects" >Analog Electronic Circuits Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_ece_DLD" name="subjects[]"  id="subjects" >Digital Logic Design(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_ece_DLDLAB" name="subjects[]"  id="subjects" >Digital Logic Design Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_ece_DSP" name="subjects[]"  id="subjects" >Digital Signal Processing(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_ece_DSPLAB" name="subjects[]"  id="subjects" >Digital Signal Processing Lab(1.5Cr)</label>
+  </div>
+  <div class="form-check">
+      <label><input type="checkbox"  value="e2sem1_ece_CS" name="subjects[]"  id="subjects" >Control Systems(3cr)</label>
+  </div>
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>    
+
+
+
+
+<!-- E2Sem2 ECE Subjects-->
+
+<div class="form-group" id="e2sem2_ece_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_ece_RL" name="subjects[]"  id="subjects" >Robotics Laboratory(2.5Cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem2_ece_CSI" name="subjects[]"  id="subjects" >Communication Systems-1(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem2_ece_CSILAB" name="subjects[]"  id="subjects" >Communication Systems-1 Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_ece_DSD" name="subjects[]"  id="subjects" >Digital System Design(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_ece_DSDLAB" name="subjects[]"  id="subjects" >Digital System Design Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_ece_LIC" name="subjects[]"  id="subjects" >Linear Integrated Circuits(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_ece_LICLAB" name="subjects[]"  id="subjects" >Linear Integrated Circuits Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_ece_EWG" name="subjects[]"  id="subjects" >Electromagnetic Waves & Guided Media(4Cr)</label>
+  </div>
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>    
+
+
+
+
+  <!-- E3Sem1 ECE Subjects-->
+
+<div class="form-group" id="e3sem1_ece_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_ece_CN" name="subjects[]"  id="subjects" >Computer Networks(3Cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem1_ece_COA" name="subjects[]"  id="subjects" >Computer Organization & Architecture(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem1_ece_ENGLAB" name="subjects[]"  id="subjects" >English-Language Communication skills Lab-2(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_ece_CSII" name="subjects[]"  id="subjects" >Communication Systems-2(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_ece_CSIILAB" name="subjects[]"  id="subjects" >Communication Systems-2 Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_ece_MMCLAB" name="subjects[]"  id="subjects" >Microprocessors,Microcontrollers & Computer Networks Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_ece_RFMELAB" name="subjects[]"  id="subjects" >Radio Frequency & Microwave Engg. Lab(2.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_ece_MPI" name="subjects[]"  id="subjects" >Mini-Project-I(Socially Relevant Project)(1Cr)</label>
+  </div>
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>    
+
+
+
+<!-- E3Sem2 ECE Subjects-->
+
+<div class="form-group" id="e3sem2_ece_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_ece_ENGLAB" name="subjects[]"  id="subjects" >English-Language Communication skills Lab-3(1.5Cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem2_ece_PDI" name="subjects[]"  id="subjects" >Product Design & Innovation(1cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem2_ece_EI" name="subjects[]"  id="subjects" >Elective-1(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_ece_EII" name="subjects[]"  id="subjects" >Elective-2(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_ece_OEI" name="subjects[]"  id="subjects" >Open Elective-1(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_ece_OEII" name="subjects[]"  id="subjects" >Open Elective-2(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_ece_MPII" name="subjects[]"  id="subjects" >Mini Project-II(1.5cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>    
+
+
+
+
+
+<!-- E4Sem1 ECE Subjects-->
+
+<div class="form-group" id="e4sem1_ece_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_ece_EIII" name="subjects[]"  id="subjects" >Elective-3(3Cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem1_ece_EIV" name="subjects[]"  id="subjects" >Elective-4(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem1_ece_OEIII" name="subjects[]"  id="subjects" >Open Elective-3(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_ece_SIP" name="subjects[]"  id="subjects" >Summer Internship Project(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_ece_PI" name="subjects[]"  id="subjects" >Project I(4cr)</label>
+  </div>
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div> 
+
+
+
+<!-- E4Sem2 ECE Subjects-->
+
+<div class="form-group" id="e4sem2_ece_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e4sem2_ece_CS" name="subjects[]"  id="subjects" >Community Service(2Cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem2_ece_EV" name="subjects[]"  id="subjects" >Elective-5(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem2_ece_EIV" name="subjects[]"  id="subjects" >Open Elective-4(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem2_ece_PII" name="subjects[]"  id="subjects" >Project-II & Dissertation(6cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div> 
+
+
+
+
+
+
+
+ <!-- E1Sem1 mech Subjects -->
+
+ <div class="form-group" id="e1sem1_mech_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_mech_DM" name="subjects[]"  id="subjects" >Differential Equations and Multivariable Calculus(4cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem1_mech_ENGLAB" name="subjects[]"  id="subjects" >English Language Proficiency Lab(2.5cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem1_mech_EP" name="subjects[]"  id="subjects" >Engineering Physics(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_mech_BEEE" name="subjects[]"  id="subjects" >Basic Electrical and Electronics Engineering(4Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_mech_EC" name="subjects[]"  id="subjects" >Engineering Chemistry(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_mech_WP" name="subjects[]"  id="subjects" >Workshop Practice(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_mech_BEEELAB" name="subjects[]"  id="subjects" >Basic Electrical & Electronics Engineering Laboratory(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_mech_ECPLAB" name="subjects[]"  id="subjects" >Engineering Physics & Chemistry Laboratory(1.5Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E1Sem2 mech Subjects -->
+
+<div class="form-group" id="e1sem2_mech_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_mech_MM" name="subjects[]"  id="subjects" >Mathematical Methods(4cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem2_mech_EM" name="subjects[]"  id="subjects" >Engineering Mechanics(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem2_mech_MSM" name="subjects[]"  id="subjects" >Material Science & Metallurgy(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_mech_PDS" name="subjects[]"  id="subjects" >Programming and Data Structures(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_mech_EGCD" name="subjects[]"  id="subjects" >Engineering Graphics and Computer Drafting(2.5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_mech_MSELAB" name="subjects[]"  id="subjects" >Material Science and Metallurgy Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_mech_PDSLAB" name="subjects[]"  id="subjects" >Programming and Data Structures Laboratory(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_mech_ES" name="subjects[]"  id="subjects" >Environmental Studies(0Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E2Sem1 mech Subjects -->
+
+<div class="form-group" id="e2sem1_mech_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_mech_TC" name="subjects[]"  id="subjects" >Transform Calculus(4cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem1_mech_KOM" name="subjects[]"  id="subjects" >Kinematics of Machinery(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem1_mech_TD" name="subjects[]"  id="subjects" >Thermodynamics(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_mech_MOS" name="subjects[]"  id="subjects" >Mechanics of Solids(4Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_mech_MP" name="subjects[]"  id="subjects" >Manufacturing Processes(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_mech_MOSLAB" name="subjects[]"  id="subjects" >Mechanics of Solids Laboratory(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_mech_CAMD" name="subjects[]"  id="subjects" >Computer Aided Machine Drawing(1.5cr)</label>
+  </div>
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E2Sem2 mech Subjects -->
+
+<div class="form-group" id="e2sem2_mech_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_mech_DOME" name="subjects[]"  id="subjects" >Design of Machine Elements(4cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem2_mech_DOM" name="subjects[]"  id="subjects" >Dynamics of Machinery(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem2_mech_FMHM" name="subjects[]"  id="subjects" >Fluid Mechanics & Hydraulic Machinery(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_mech_MCMT" name="subjects[]"  id="subjects" >Metal Cutting and Machine Tools(4Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_mech_PS" name="subjects[]"  id="subjects" >Introduction to Probability and Statistics(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_mech_FMHMLAB" name="subjects[]"  id="subjects" >Fluid Mechanics & Hydraulic Machinery Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_mech_MCMTLAB" name="subjects[]"  id="subjects" >Metal cutting and Machine Tools Laboratory(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_mech_IC" name="subjects[]"  id="subjects" >Indian Constitution(0Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E3Sem1 mech Subjects -->
+
+<div class="form-group" id="e3sem1_mech_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_mech_HT" name="subjects[]"  id="subjects" >Heat Transfer(4cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem1_mech_DTE" name="subjects[]"  id="subjects" >Design of Transmission Elements(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem1_mech_AT" name="subjects[]"  id="subjects" >Applied Thermodynamics(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_mech_MMM" name="subjects[]"  id="subjects" >Metrology and Mechanical Measurements(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_mech_MMMLAB" name="subjects[]"  id="subjects" >Metrology and Mechanical Measurements Laboratory(1.5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_mech_HTLAB" name="subjects[]"  id="subjects" >Heat Transfer Laboratory(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_mech_ATLAB" name="subjects[]"  id="subjects" >Applied Thermodynamics Laboratory(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_mech_ESLAB" name="subjects[]"  id="subjects" >Employability Skills Laboratory(1.5Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+<!-- E3Sem2 mech Subjects -->
+
+<div class="form-group" id="e3sem2_mech_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_mech_OR" name="subjects[]"  id="subjects" >Operations Research(4cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem2_mech_FEM" name="subjects[]"  id="subjects" >Finite Element Method(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem2_mech_MEFA" name="subjects[]"  id="subjects" >Managerial Economics and Financial Accountancy(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_mech_ECI" name="subjects[]"  id="subjects" >Program Elective Course-1(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_mech_ECII" name="subjects[]"  id="subjects" >Program Elective Course-2(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_mech_CAMSLAB" name="subjects[]"  id="subjects" >Computer Aided Modeling and Simulation Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_mech_CCLAB" name="subjects[]"  id="subjects" >Communicative Competence Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_mech_SI" name="subjects[]"  id="subjects" >Summer Internship(3Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+
+<!-- E4Sem1 mech Subjects -->
+
+<div class="form-group" id="e4sem1_mech_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_mech_ECIII" name="subjects[]"  id="subjects" >Program Elective Course-3(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem1_mech_OECI" name="subjects[]"  id="subjects" >Open Elective Course-1(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem1_mech_OECII" name="subjects[]"  id="subjects" >Open Elective Course-2(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_mech_P" name="subjects[]"  id="subjects" >Project(4.5Cr)</label>
+  </div>
+  
+  
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E4Sem2 mech Subjects -->
+
+<div class="form-group" id="e4sem2_mech_subjects" style="display:none">
+<label for="checkbox">Subjects:</label>
+
+<div class="checkbox ">
+
+<div class="form-check">
+<label><input type="checkbox"  value="e4sem2_mech_ECIV" name="subjects[]"  id="subjects" >Program Elective Course-4(3cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e4sem2_mech_OECIII" name="subjects[]"  id="subjects" >Open Elective Course-3(3cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e4sem2_mech_OECIV" name="subjects[]"  id="subjects" >Open Elective Course-4(3cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e4sem2_mech_CS" name="subjects[]"  id="subjects" >Community Service(2Cr)</label>
+</div>
+<div class="form-check">
+  <label><input type="checkbox"  value="e4sem2_mech_P" name="subjects[]"  id="subjects" >Project(6Cr)</label>
+</div>
+
+</div>
+<div class="error" id="subjectsError"></div>
+</div>
+
+
+
+
+
+ <!-- E1Sem1 Civil Subjects -->
+
+ <div class="form-group" id="e1sem1_civil_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_civil_EC" name="subjects[]"  id="subjects" >Engineering Chemistry(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem1_civil_DM" name="subjects[]"  id="subjects" >Differential Equations and Multivariable Calculus(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem1_civil_PDS" name="subjects[]"  id="subjects" >Programming and Data structures(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_civil_EGCD" name="subjects[]"  id="subjects" >Engineering Graphics and Computer Drafting(2.5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_civil_ENGLABI" name="subjects[]"  id="subjects" >English Language Communication Skills Lab-I(2.5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_civil_ECLAB" name="subjects[]"  id="subjects" >Engineering Chemistry Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_civil_PDSLAB" name="subjects[]"  id="subjects" >Programming and Data Structures Laboratory(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_civil_AR" name="subjects[]"  id="subjects" >Aptitude and Reasoning(0Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E1Sem2 Civil Subjects -->
+
+<div class="form-group" id="e1sem2_civil_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_civil_EP" name="subjects[]"  id="subjects" >E1 Engineering Physics- CE(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem2_civil_MM" name="subjects[]"  id="subjects" >Mathematical Methods(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem2_civil_BEEE" name="subjects[]"  id="subjects" >Basic Electrical and Electronics Engineering(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_civil_EM" name="subjects[]"  id="subjects" >Engineering Mechanics(4Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_civil_EG" name="subjects[]"  id="subjects" >Engineering Geology(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_civil_EPLAB" name="subjects[]"  id="subjects" >Engineering Physics Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_civil_WS" name="subjects[]"  id="subjects" >Workshop(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_civil_ES" name="subjects[]"  id="subjects" >Environmental Science(0Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E2Sem1 Civil Subjects -->
+
+<div class="form-group" id="e2sem1_civil_subjects" style="display:none">
+<label for="checkbox">Subjects:</label>
+
+<div class="checkbox ">
+
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem1_civil_MEFA" name="subjects[]"  id="subjects" >Management Economics and Financial Analysis(3cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e2sem1_civil_BMC" name="subjects[]"  id="subjects" >Building Materials and Construction(3cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e2sem1_civil_CT" name="subjects[]"  id="subjects" >Concrete Technology(3cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem1_civil_MOF" name="subjects[]"  id="subjects" >Mechanics of Fluids(3Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem1_civil_MOMI" name="subjects[]"  id="subjects" >Mechanics of Materials-I(3Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem1_civil_SI" name="subjects[]"  id="subjects" >Surveying-I(3cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem1_civil_MOMLAB" name="subjects[]"  id="subjects" >Mechanics of Materials Lab(1.5cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem1_civil_SL" name="subjects[]"  id="subjects" >Surveying Lab(1.5Cr)</label>
+</div>
+<div class="form-check">
+  <label><input type="checkbox"  value="e2sem1_civil_IC" name="subjects[]"  id="subjects" >Indian Constitution(0Cr)</label>
+</div>
+
+</div>
+<div class="error" id="subjectsError"></div>
+</div>
+
+
+
+
+<!-- E2Sem2 Civil Subjects -->
+
+<div class="form-group" id="e2sem2_civil_subjects" style="display:none">
+<label for="checkbox">Subjects:</label>
+
+<div class="checkbox ">
+
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem2_civil_HE" name="subjects[]"  id="subjects" >Hydraulics Engineering(3cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e2sem2_civil_MOMII" name="subjects[]"  id="subjects">Mechanics of Materials-II(3cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e2sem2_civil_SE" name="subjects[]"  id="subjects" >Soil Mechanics(4cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem2_civil_SA" name="subjects[]"  id="subjects" >Structural Analysis(4Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem2_civil_SII" name="subjects[]"  id="subjects" >Surveying-II(3Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem2_civil_WRE" name="subjects[]"  id="subjects" >Water Resources Engineering(3cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem2_civil_CTLAB" name="subjects[]"  id="subjects" >Concrete Technology Lab(1.5cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e2sem2_civil_HELAB" name="subjects[]"  id="subjects" >Hydraulics Engineering Lab(1.5Cr)</label>
+</div>
+
+</div>
+<div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E3Sem1 Civil Subjects -->
+
+<div class="form-group" id="e3sem1_civil_subjects" style="display:none">
+<label for="checkbox">Subjects:</label>
+
+<div class="checkbox ">
+
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem1_civil_ASA" name="subjects[]"  id="subjects" >Advanced Structural Analysis(4cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e3sem1_civil_DRCS" name="subjects[]"  id="subjects">Design of Reinforced concrete Structures(4cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e3sem1_civil_EEI" name="subjects[]"  id="subjects" >Environmental Engineering-I(3Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem1_civil_EC" name="subjects[]"  id="subjects" >Estimation and Costing(3Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem1_civil_TE" name="subjects[]"  id="subjects" >Transportation Engineering-I(3Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem1_civil_ENGLABII" name="subjects[]"  id="subjects" >English Language Communication Skills Lab-II(1.5cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem1_civil_SMLAB" name="subjects[]"  id="subjects" >Soil Mechanics Lab(1.5cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem1_civil_TELAB" name="subjects[]"  id="subjects" >Transportation Engineering Lab(1.5Cr)</label>
+</div>
+
+</div>
+<div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E3Sem2 Civil Subjects -->
+
+<div class="form-group" id="e3sem2_civil_subjects" style="display:none">
+<label for="checkbox">Subjects:</label>
+
+<div class="checkbox ">
+
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem2_civil_BPCDLAB" name="subjects[]"  id="subjects" >Building Planning and Computer Aided Drawing Lab(2.5cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e3sem2_civil_DSS" name="subjects[]"  id="subjects">Design of Steel Structures(4cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e3sem2_civil_EEII" name="subjects[]"  id="subjects" >Environmental Engineering-II(3Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem2_civil_FE" name="subjects[]"  id="subjects" >Foundation Engineering(3Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem2_civil_TEII" name="subjects[]"  id="subjects" >Transportation Engineering-II(3Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem2_civil_MI" name="subjects[]"  id="subjects" >MOOC-1(3cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem2_civil_ENGLABII" name="subjects[]"  id="subjects" >English Language Communication Skills Lab-1(1.5cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e3sem2_civil_EELAB" name="subjects[]"  id="subjects" >Environmental Engineering Lab(1.5Cr)</label>
+</div>
+
+</div>
+<div class="error" id="subjectsError"></div>
+</div>
+
+<!-- E4Sem1 Civil Subjects -->
+
+<div class="form-group" id="e4sem1_civil_subjects" style="display:none">
+<label for="checkbox">Subjects:</label>
+
+<div class="checkbox ">
+
+<div class="form-check">
+<label><input type="checkbox"  value="e4sem1_civil_MII" name="subjects[]"  id="subjects" >MOOC-2(3cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e4sem1_civil_PECI" name="subjects[]"  id="subjects">Professional Elective course-1(3cr)</label>
+</div>
+<div class="form-check">
+
+<label><input type="checkbox"  value="e4sem1_civil_PECII" name="subjects[]"  id="subjects" >Professional Elective course-2(3Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e4sem1_civil_OECI" name="subjects[]"  id="subjects" >Open Elective Course-1(3Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e4sem1_civil_PI" name="subjects[]"  id="subjects" >Project-1(4Cr)</label>
+</div>
+<div class="form-check">
+<label><input type="checkbox"  value="e4sem1_civil_S" name="subjects[]"  id="subjects" >Seminar(0cr)</label>
+</div>
+
+</div>
+<div class="error" id="subjectsError"></div>
+</div>
+
+<!-- E4Sem2 Civil Subjects -->
+
+<div class="form-group" id="e4sem2_civil_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e4sem2_civil_PECIII" name="subjects[]"  id="subjects" >Professional Elective course-3(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem2_civil_MIII" name="subjects[]"  id="subjects">MOOC-3(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem2_civil_OECIII" name="subjects[]"  id="subjects" >Open Elective Course-3(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem2_civil_P2" name="subjects[]"  id="subjects" >Project-2(5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem2_civil_ICS" name="subjects[]"  id="subjects" >Indian Community Services(2Cr)</label>
+  </div>
+
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+
+<!-- E1Sem1 CHEMICAL Subjects -->
+
+<div class="form-group" id="e1sem1_chem_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_chem_EB" name="subjects[]"  id="subjects" >Engineering Biology(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem1_chem_EC" name="subjects[]"  id="subjects" >Engineering Chemistry(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem1_chem_EMI" name="subjects[]"  id="subjects" >Engineering Mathematics-I(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_chem_ICE" name="subjects[]"  id="subjects" >Introduction of Chemical Engineering(2Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_chem_ESE" name="subjects[]"  id="subjects" >Engineering and Solid Mechanics(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_chem_ENGLABI" name="subjects[]"  id="subjects" >English Language Proficiency Lab-I(2.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_chem_ECLAB" name="subjects[]"  id="subjects" >Engineering Chemistry Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_chem_WLAB" name="subjects[]"  id="subjects" >Workshop Lab(1.5Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+
+<!-- E1SEM2 CHEMICAL Subjects -->
+
+<div class="form-group" id="e1sem2_chem_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_chem_EP" name="subjects[]"  id="subjects" >Engineering Physics(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem2_chem_EMII" name="subjects[]"  id="subjects" >Engineering Mathematics –II(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem2_chem_EGCD" name="subjects[]"  id="subjects" >Engineering Graphics and Design(2.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_chem_PDS" name="subjects[]"  id="subjects" >Programming and Data Structures(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_chem_CPC" name="subjects[]"  id="subjects" >Chemical Process Calculations(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_chem_FM" name="subjects[]"  id="subjects" >Fluid Mechanics(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_chem_ES" name="subjects[]"  id="subjects" >Environmental Sciences(0cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_chem_PDSLAB" name="subjects[]"  id="subjects" >Programming and Data Structures Lab(1.5Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E2SEM1 CHEMICAL Subjects -->
+
+<div class="form-group" id="e2sem1_chem_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_chem_TC" name="subjects[]"  id="subjects" >Transform Calculus(4cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem1_chem_MT" name="subjects[]"  id="subjects" >Mechanical Technology(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem1_chem_TDI" name="subjects[]"  id="subjects" >Thermo Dynamics-I(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_chem_HT" name="subjects[]"  id="subjects" >Heat Transfer(4Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_chem_MUO" name="subjects[]"  id="subjects" >Mechanical Unit Operations(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_chem_MEFA" name="subjects[]"  id="subjects" >Managerial Economics and Financial Analysis(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_chem_IC" name="subjects[]"  id="subjects" >Indian Constitution(0cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_chem_FELAB" name="subjects[]"  id="subjects" >Fluid Mechanics Lab(1.5Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+
+<!-- E2SEM2 CHEMICAL Subjects -->
+
+<div class="form-group" id="e2sem2_chem_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_chem_BEEE" name="subjects[]"  id="subjects" >Basics of Electrical and Electronics Engineering(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem2_chem_OOPS" name="subjects[]"  id="subjects" >Object Oriented programming through JAVA(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem2_chem_CREI" name="subjects[]"  id="subjects" >Chemical Reaction Engineering-I(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_chem_MTOI" name="subjects[]"  id="subjects" >Mass Transfer Operations-I(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_chem_TDII" name="subjects[]"  id="subjects" >Thermo Dynamics-II(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_chem_OOPSLAB" name="subjects[]"  id="subjects" >Object Oriented programming through JAVA LAB(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_chem_HTLABI" name="subjects[]"  id="subjects" >Heat Transfer Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_chem_MUOLAB" name="subjects[]"  id="subjects" >Mechanical Unit Operations Lab(1.5Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+
+
+<!-- E3SEM1 CHEMICAL Subjects -->
+
+<div class="form-group" id="e3sem1_chem_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_chem_CPDC" name="subjects[]"  id="subjects" >Chemical Process Dynamics and Control(4cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem1_chem_CT" name="subjects[]"  id="subjects" >Chemical Technology(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem1_chem_CREII" name="subjects[]"  id="subjects" >Chemical Reaction Engineering-II(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_chem_MTOII" name="subjects[]"  id="subjects" >Mass Transfer Operations-II(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_chem_NMCE" name="subjects[]"  id="subjects" >Numerical Methods in Chemical Engineering(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_chem_CRELAB" name="subjects[]"  id="subjects" >Chemical Reaction Engineering Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_chem_NMCELAB" name="subjects[]"  id="subjects" >Numerical Methods in Chemical Engineering Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_chem_ESLAB" name="subjects[]"  id="subjects" >Employability Skills Lab-2(1.5Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E3SEM2 CHEMICAL Subjects -->
+
+<div class="form-group" id="e3sem2_chem_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_chem_PED" name="subjects[]"  id="subjects" >Process Equipment Design(3.5cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem2_chem_PDE" name="subjects[]"  id="subjects" >Plant Design and Economics(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem2_chem_TP" name="subjects[]"  id="subjects" >Transport Phenomena(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_chem_PECI" name="subjects[]"  id="subjects" >Professional Elective Course-1(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_chem_OECI" name="subjects[]"  id="subjects" >Open Elective Course-1(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_chem_CPDCLAB" name="subjects[]"  id="subjects" >Chemical Process Dynamics and Control Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_chem_MTOLAB" name="subjects[]"  id="subjects" >Mass Transfer Operations Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_chem_CCLABIII" name="subjects[]"  id="subjects" >Communicative Competence Lab-3(1.5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_chem_SI" name="subjects[]"  id="subjects" >Summer Internship(3cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+<!-- E4SEM1 CHEMICAL Subjects -->
+
+<div class="form-group" id="e4sem1_chem_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_chem_PECII" name="subjects[]"  id="subjects" >Professional Elective Course-2(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem1_chem_PECIII" name="subjects[]"  id="subjects" >Professional Elective Course-3(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem1_chem_OECII" name="subjects[]"  id="subjects" >Open Elective Course-2(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_chem_CDC" name="subjects[]"  id="subjects" >Career Development Course(0Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_chem_P" name="subjects[]"  id="subjects" >Project(6Cr)</label>
+  </div>
+ 
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+<!-- E4SEM2 CHEMICAL Subjects -->
+
+<div class="form-group" id="e4sem2_chem_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e4sem2_chem_PECIV" name="subjects[]"  id="subjects" >Professional Elective Course-4(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem2_chem_PECV" name="subjects[]"  id="subjects" >Professional Elective Course-5(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem2_chem_OPCIII" name="subjects[]"  id="subjects" >Open Elective Course-3(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem2_chem_ICS" name="subjects[]"  id="subjects" >Indian Community Services(2Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem2_chem_P" name="subjects[]"  id="subjects" >Project(6Cr)</label>
+  </div>
+ 
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+
+
+
+<!-- E1Sem1 EEE Subjects -->
+
+<div class="form-group" id="e1sem1_eee_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_eee_DM" name="subjects[]"  id="subjects" >Differential Equations and Multivariable calculus(4cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem1_eee_EP" name="subjects[]"  id="subjects" >Engineering Physics(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem1_eee_EPLAB" name="subjects[]"  id="subjects" >Engineering Physics Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_eee_EGCD" name="subjects[]"  id="subjects" >Engineering Graphics & Computer Drafting(2.5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_eee_ET" name="subjects[]"  id="subjects" >Electrical Technology(4Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_eee_ETLAB" name="subjects[]"  id="subjects" >Electrical Technology Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_eee_ILTA" name="subjects[]"  id="subjects" >Introduction to Latest Technical Advancements(1cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_eee_PDS" name="subjects[]"  id="subjects" >Programming & Data Structures(3Cr)</label>
+  </div>
+
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem1_eee_PDSLAB" name="subjects[]"  id="subjects" >Programming & Data Structures Lab(1.5Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E1Sem2 EEE Subjects -->
+
+<div class="form-group" id="e1sem2_eee_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_eee_LA" name="subjects[]"  id="subjects" >Linear Algebra & Numerical Methods(4cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem2_eee_DLD" name="subjects[]"  id="subjects" >Digital Logic Design(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e1sem2_eee_DLDLAB" name="subjects[]"  id="subjects" >Digital Logic Design Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_eee_CL" name="subjects[]"  id="subjects" >Computational Lab(1.5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_eee_ENGLABI" name="subjects[]"  id="subjects" >English Language communication skills lab 1(2.5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_eee_EDC" name="subjects[]"  id="subjects" >Electronics Devices and Circuits(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_eee_EDCLAB" name="subjects[]"  id="subjects" >Electronics Devices and Circuits Lab(1cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_eee_NT" name="subjects[]"  id="subjects" >Network Theory(4Cr)</label>
+  </div>
+
+  <div class="form-check">
+    <label><input type="checkbox"  value="e1sem2_eee_IOA" name="subjects[]"  id="subjects" >Introduction to AI(1Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+<!-- E2Sem1 EEE Subjects -->
+
+<div class="form-group" id="e2sem1_eee_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_eee_PRV" name="subjects[]"  id="subjects" >Probability & Random Variables(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem1_eee_IOTLAB" name="subjects[]"  id="subjects" >Internet of Things Lab(1cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem1_eee_AEC" name="subjects[]"  id="subjects" >Analog Electronic Circuits(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_eee_AECLAB" name="subjects[]"  id="subjects" >Analog Electronic Circuits Lab(1.5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_eee_OOPS" name="subjects[]"  id="subjects" >Object Oriented Programming(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_eee_OOPSLAB" name="subjects[]"  id="subjects" >Object Oriented Programming Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_eee_SS" name="subjects[]"  id="subjects" >Signals & Systems(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_eee_EM" name="subjects[]"  id="subjects" >Electrical Machines(4Cr)</label>
+  </div>
+
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem1_eee_EMLAB" name="subjects[]"  id="subjects" >Electrical Machines Lab(1.5Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E2Sem2 EEE Subjects -->
+
+<div class="form-group" id="e2sem2_eee_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_eee_RL" name="subjects[]"  id="subjects" >Robotics Laboratory(1cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem2_eee_PSI" name="subjects[]"  id="subjects" >Power Systems-I(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e2sem2_eee_ML" name="subjects[]"  id="subjects" >Machine Learning(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_eee_CS" name="subjects[]"  id="subjects" >Control Systems(4Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_eee_CSLAB" name="subjects[]"  id="subjects" >Control Systems Lab(1.5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_eee_LIC" name="subjects[]"  id="subjects" >Linear Integrated Circuits(4cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_eee_LICLAB" name="subjects[]"  id="subjects" >Linear Integrated Circuits Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_eee_PE" name="subjects[]"  id="subjects" >Power Electronics(4Cr)</label>
+  </div>
+
+  <div class="form-check">
+    <label><input type="checkbox"  value="e2sem2_eee_PELAB" name="subjects[]"  id="subjects" >Power Electronics Lab(1.5Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E3Sem1 EEE Subjects -->
+
+<div class="form-group" id="e3sem1_eee_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_eee_DSP" name="subjects[]"  id="subjects" >Digital Signal Processing(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem1_eee_PSII" name="subjects[]"  id="subjects" >Power Systems-II(4cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem1_eee_PSLAB" name="subjects[]"  id="subjects" >Power Systems Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_eee_ENGLAB" name="subjects[]"  id="subjects" >English Language communication skills Lab-2(1.5Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_eee_EV" name="subjects[]"  id="subjects" >Electrical Vehicles(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_eee_EVLAB" name="subjects[]"  id="subjects" >Electrical Vehicles Lab(1.5cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_eee_ES" name="subjects[]"  id="subjects" >Embedded Systems(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_eee_ESLAB" name="subjects[]"  id="subjects" >Embedded Systems Lab(1.5Cr)</label>
+  </div>
+
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_eee_MPI" name="subjects[]"  id="subjects" >Mini-Project-I(1Cr)</label>
+  </div>
+
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem1_eee_PDILAB" name="subjects[]"  id="subjects" >Product Design & Innovation lab(1Cr)</label>
+  </div>
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+
+<!-- E3Sem2 EEE Subjects -->
+
+<div class="form-group" id="e3sem2_eee_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_eee_ENGLABIII" name="subjects[]"  id="subjects" >English Language Communication skills lab-3(1.5cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem2_eee_EI" name="subjects[]"  id="subjects" >Elective-1(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e3sem2_eee_EII" name="subjects[]"  id="subjects" >Elective-2(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_eee_OEI" name="subjects[]"  id="subjects" >Open Elective-1(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_eee_OEII" name="subjects[]"  id="subjects" >Open Elective-2(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_eee_MPII" name="subjects[]"  id="subjects" >Mini Project-II(1cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_eee_CDC" name="subjects[]"  id="subjects" >Career Development Course(0cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e3sem2_eee_IC" name="subjects[]"  id="subjects" >Indian Constitution(0Cr)</label>
+  </div>
+
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E4Sem1 EEE Subjects -->
+
+<div class="form-group" id="e4sem1_eee_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_eee_EIII" name="subjects[]"  id="subjects" >Elective-3(3cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem1_eee_EIV" name="subjects[]"  id="subjects" >Elective-4(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem1_eee_OEIII" name="subjects[]"  id="subjects" >Open Elective-3(3cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_eee_SIP" name="subjects[]"  id="subjects" >Summer Internship Project(3Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_eee_PI" name="subjects[]"  id="subjects" >ProjectI(4Cr)</label>
+  </div>
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_eee_ES" name="subjects[]"  id="subjects" >Environmental Science(0cr)</label>
+  </div>
+
+
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+</div>
+
+
+<!-- E4Sem2 EEE Subjects -->
+
+<div class="form-group" id="e4sem2_eee_subjects" style="display:none">
+  <label for="checkbox">Subjects:</label>
+
+  <div class="checkbox ">
+
+    <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_eee_EIII" name="subjects[]"  id="subjects" >Community Service(2cr)</label>
+  </div>
+  <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem1_eee_EIV" name="subjects[]"  id="subjects" >Elective-5(3cr)</label>
+    </div>
+    <div class="form-check">
+
+    <label><input type="checkbox"  value="e4sem1_eee_OEIII" name="subjects[]"  id="subjects" >Open Elective-4(3cr)</label>
+  </div>
+
+  <div class="form-check">
+    <label><input type="checkbox"  value="e4sem1_eee_PI" name="subjects[]"  id="subjects" >Project-II(6Cr)</label>
+  </div>
+
+
+    </div>
+    <div class="error" id="subjectsError"></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="form-group">
+        <div class="checkbox ">
+          <label><input type="checkbox"  value="Terms" name="check[]"  id="check" checked><a href=" ">I agree with the all Terms and Condtions</a></label>
+          </div>
+    </div>
+    <div class="btn-group">
+        <button type="submit" class="btn btn-primary bt2 "   style="margin-bottom:10px;width:100px;">Register</button> &nbsp;&nbsp;
+         <a href="{{ url_for('login_form') }}"> <button type="button" class="btn btn-success bt2" style="margin-bottom:10px;width:100px; ">login</button></a>
+   </div>
+</div>
+    
+        </form>
+        <button type="button" class="btn btn-warning bt2" id="secondary_details_button" onclick="showNextSection()" style="margin-bottom: 10px; width: 200px;">Secondary Details</button>
+
+
+    </div>
+    
+    </div>
+    </div>
+  
+    <script >
+     /*For Password Viewer*/
+      
+
+  		
+		const togglePassword = document.querySelector('#togglePassword1');
+  const password = document.querySelector('#user-password');
+
+  togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+
+
+  
+  function showNextSection() {
+        document.getElementById('next').style.display = 'block';
+        document.getElementById('previous').style.display = 'none';
+        document.getElementById('secondary_details_button').style.display = 'none';
+     }
+
+    function showPreviousSection() {
+        document.getElementById('next').style.display = 'none';
+        document.getElementById('previous').style.display = 'block';
+        document.getElementById('secondary_details_button').style.display = 'block';
+
+    }
+ 
+ 
+
+ </script>
+
+
+
+ </body>
+</html>
+ 
+
+
+ 
